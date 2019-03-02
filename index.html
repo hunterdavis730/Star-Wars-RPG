@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="Assets/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-center display-3 shadow">Star Wars Battle Arena</h2>
+            </div>
+        </div>
+        <div class="row mt-4">
+
+            <div class="col-md-12 text-center mb-1" id="choose-side">
+                <h5 class="text-center text-light">Choose Your Side</h5>
+            </div>
+
+            <div class="col-md-12 d-flex justify-content-center">
+                <button type="button" id="hero-button" class="btn btn-light mr-1 side-buttons">Heroes</button>
+                <button type="button" id="villain-button" class="btn btn-dark ml-1 side-buttons">Villains</button>
+            </div>
+        </div>
+        <!-- Hero Row start of game -->
+        <div class="row mt-3 d-none" id="hero-row">
+            <div class="col-md-12 d-inline-flex justify-content-around">
+                <div class="card" style="width: 18rem;">
+                    <img src="Assets/Images/Qui-Gon.jpeg" style="width: 100%;" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Qui-Gon Jinn</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's
+                            content.</p>
+                        <a href="#" id="select-jinn" class="btn btn-success ml-5 ">Select Character</a>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <img src="Assets/Images/han-solo.jpeg" style="width: 100%;" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Han Solo</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's
+                            content.</p>
+                        <a href="#" id="select-solo" class="btn btn-success ml-5">Select Character</a>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <img src="Assets/Images/mace-windu.jpeg" style="width: 100%;" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Mace Windu</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's
+                            content.</p>
+                        <a href="#" id="select-windu" class="btn btn-success ml-5">Select Character</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Villian Row start of game-->
+        <div class="row mt-3 d-none" id="villain-row">
+            <div class="col-md-12 d-inline-flex justify-content-around">
+                <div class="card bg-dark" style="width: 18rem;">
+                    <img src="Assets/Images/kylo-ren.jpeg" style="width: 100%;" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title text-center text-danger">Kylo Ren</h5>
+                        <p class="card-text text-white">Some quick example text to build on the card title and make up
+                            the bulk of
+                            the card's
+                            content.</p>
+                        <a href="#" id="select-ren" class="btn btn-danger ml-5">Select Character</a>
+                    </div>
+                </div>
+                <div class="card bg-dark" style="width: 18rem;">
+                    <img src="Assets/Images/boba-fett.jpeg" style="width: 100%;" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title text-center text-danger">Boba Fett</h5>
+                        <p class="card-text text-white">Some quick example text to build on the card title and make up
+                            the bulk of
+                            the card's
+                            content.</p>
+                        <a href="#" id="select-fett" class="btn btn-danger ml-5">Select Character</a>
+                    </div>
+                </div>
+                <div class="card bg-dark" style="width: 18rem;">
+                    <img src="Assets/Images/darth-maul.jpeg" style="width: 100%;" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title text-center text-danger">Darth Maul</h5>
+                        <p class="card-text text-white">Some quick example text to build on the card title and make up
+                            the bulk of
+                            the card's
+                            content.</p>
+                        <a href="#" id="select-maul" class="btn btn-danger ml-5">Select Character</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <!-- User Fighter Collumn -->
+
+                <!-- Darth Maul -->
+                <div class="card bg-dark d-none" id="darth-maul" style="width: 18rem;">
+                    <img src="Assets/Images/darth-maul.jpeg" style="width: 100%;" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title text-danger">Darth Maul</h5>
+                        <p class="card-text text-white h_p">Current HP:
+                        </p>
+                        <div class="d-flex justify-content-end">
+                            <a href="#" class="btn btn-danger">Attack</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Boba Fett -->
+                <div class="card bg-dark d-none" id="boba-fett" style="width: 18rem;">
+                    <img src="Assets/Images/boba-fett.jpeg" style="width: 100%;" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title text-danger">Boba Fett</h5>
+                        <p class="card-text text-white h_p">Current HP:
+                        </p>
+                        <div class="d-flex justify-content-end">
+                            <a href="#" class="btn btn-danger">Attack</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Kylo Ren -->
+                <div class="card bg-dark d-none" id="kylo-ren" style="width: 18rem;">
+                    <img src="Assets/Images/kylo-ren.jpeg" style="width: 100%;" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title text-danger">Kylo Ren</h5>
+                        <p class="card-text text-white h_p">Current HP:
+                        </p>
+                        <div class="d-flex justify-content-end">
+                            <a href="#" class="btn btn-danger">Attack</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Qui-Gon Jinn -->
+                <div class="card d-none" id="qui-gon" style="width: 18rem;">
+                    <img src="Assets/Images/Qui-Gon.jpeg" style="width: 100%;" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title ">Qui-Gon Jinn</h5>
+                        <p class="card-text h_p">Current HP:
+                        </p>
+                        <div class="d-flex justify-content-end">
+                            <a href="#" class="btn btn-success">Attack</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Han Solo   -->
+                <div class="card d-none" id="han-solo" style="width: 18rem;">
+                    <img src="Assets/Images/han-solo.jpeg" style="width: 100%;" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title ">Han Solo</h5>
+                        <p class="card-text h_p">Current HP:
+                        </p>
+                        <div class="d-flex justify-content-end">
+                            <a href="#" class="btn btn-success">Attack</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Mace Windu -->
+                <div class="card d-none" id="mace-windu" style="width: 18rem;">
+                    <img src="Assets/Images/mace-windu.jpeg" style="width: 100%;" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title ">Mace Windu</h5>
+                        <p class="card-text h_p">Current HP:
+                        </p>
+                        <div class="d-flex justify-content-end">
+                            <a href="#" class="btn text-white" style="background-color: #BF5FFF;">Attack</a>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- End of User Fighter Collumn -->
+            <div class="col-md-4">
+                <p id="narrative"></p>
+            </div>
+
+            <div class="col-md-4">
+                <!-- Opponent Fighter Collumn -->
+                <!-- Darth Maul -->
+                <div class="card bg-dark d-none" id="opp-darth-maul" style="width: 18rem;">
+                    <img src="Assets/Images/darth-maul.jpeg" style="width: 100%;" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title text-danger">Darth Maul</h5>
+                        <p class="card-text text-white h_p">Current HP:
+                        </p>
+                        <p class="card-text text-white">Counter-Attack: </p>
+
+                    </div>
+                </div>
+                <!-- Boba Fett -->
+                <div class="card bg-dark d-none" id="opp-boba-fett" style="width: 18rem;">
+                    <img src="Assets/Images/boba-fett.jpeg" style="width: 100%;" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title text-danger">Boba Fett</h5>
+                        <p class="card-text text-white h_p">Current HP:
+                        </p>
+                        <p class="card-text text-white">Counter-Attack: </p>
+
+                    </div>
+                </div>
+                <!-- Kylo Ren -->
+                <div class="card bg-dark d-none" id="opp-kylo-ren" style="width: 18rem;">
+                    <img src="Assets/Images/kylo-ren.jpeg" style="width: 100%;" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title text-danger">Kylo Ren</h5>
+                        <p class="card-text text-white h_p">Current HP:
+                        </p>
+                        <p class="card-text text-white">Counter-Attack: </p>
+
+                    </div>
+                </div>
+                <!-- Qui-Gon Jinn -->
+                <div class="card d-none" id="opp-qui-gon" style="width: 18rem;">
+                    <img src="Assets/Images/Qui-Gon.jpeg" style="width: 100%;" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title ">Qui-Gon Jinn</h5>
+                        <p class="card-text h_p">Current HP:
+                        </p>
+                        <p class="card-text text-white">Counter-Attack: </p>
+
+                    </div>
+                </div>
+                <!-- Han Solo   -->
+                <div class="card d-none" id="opp-han-solo" style="width: 18rem;">
+                    <img src="Assets/Images/han-solo.jpeg" style="width: 100%;" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title ">Han Solo</h5>
+                        <p class="card-text h_p">Current HP:
+                        </p>
+                        <p class="card-text text-white">Counter-Attack: </p>
+
+                    </div>
+                </div>
+                <!-- Mace Windu -->
+                <div class="card d-none" id="opp-mace-windu" style="width: 18rem;">
+                    <img src="Assets/Images/mace-windu.jpeg" style="width: 100%;" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title ">Mace Windu</h5>
+                        <p class="card-text h_p">Current HP:
+                        </p>
+                        <p class="card-text text-white">Counter-Attack: </p>
+
+                    </div>
+                </div>
+            </div>
+            <!-- End of Opponent Fighter Collumn  -->
+        </div>
+
+        <!-- Hero Opponent Selection -->
+        <div class="row d-none fixed-bottom" id="opponent-hero">
+            <div class="col-md-3"></div>
+            <div class="col-md-9 d-flex justify-content-end">
+                <!-- Select Opponent  -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-center">
+                            <a href="" class="btn btn-success select-jinn mb-2"> Qui-Gon Jinn</a>
+                        </div>
+                        <p class="mb-0">Health: 125 </p>
+                        <p class="mb-0">Counter-Attack: 30</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-center">
+                            <a href="" class="btn btn-success select-solo mb-2"> Han Solo</a>
+                        </div>
+                        <p class="mb-0">Health: 180 </p>
+                        <p class="mb-0">Counter-Attack: 18</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-center">
+                            <a href="" class="btn btn-success select-windu mb-2"> Mace Windu</a>
+                        </div>
+                        <p class="mb-0">Health: 150 </p>
+                        <p class="mb-0">Counter-Attack: 23</p>
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+
+        <!-- Villain Opponents -->
+        <div class="row d-none fixed-bottom" id="opponent-villain">
+            <div class="col-md-3"></div>
+            <div class="col-md-9 d-flex justify-content-end ">
+                <!-- Select Opponent  -->
+                <div class="card bg-dark">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-center">
+                            <a href="" class="btn btn-danger select-ren mt-0 mb-2"> Kylo Ren</a>
+                        </div class="text-white">
+                        <p class="mb-0">Health: 125 </p>
+                        <p class="mb-0">Counter-Attack: 30</p>
+                    </div>
+                </div>
+                <div class="card bg-dark">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-center">
+                            <a href="" class="btn btn-danger select-fett mb-2"> Boba Fett</a>
+                        </div class="text-white">
+                        <p class="mb-0">Health: 180 </p>
+                        <p class="mb-0">Counter-Attack: 18</p>
+                    </div>
+                </div>
+                <div class="card bg-dark">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-center">
+                            <a href="" class="btn btn-danger select-maul mb-2"> Darth Maul</a>
+                        </div class="text-white">
+                        <p class="mb-0">Health: 150 </p>
+                        <p class="mb-0">Counter-Attack: 23</p>
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="Assets/game.js"></script>
+</body>
+
+</html>
