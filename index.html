@@ -182,7 +182,9 @@
             </div>
             <!-- End of User Fighter Collumn -->
             <div class="col-md-4">
-                <p id="narrative"></p>
+                <div id="narrative">
+
+                </div>
             </div>
 
             <div class="col-md-4">
@@ -192,9 +194,9 @@
                     <img src="Assets/Images/darth-maul.jpeg" style="width: 100%;" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title text-danger">Darth Maul</h5>
-                        <p class="card-text text-white h_p">Current HP:
+                        <p class="card-text text-white h_p mb-0">Current HP:
                         </p>
-                        <p class="card-text text-white">Counter-Attack: </p>
+                        <p class="card-text text-white mb-0">Counter-Attack: </p>
 
                     </div>
                 </div>
@@ -203,9 +205,9 @@
                     <img src="Assets/Images/boba-fett.jpeg" style="width: 100%;" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title text-danger">Boba Fett</h5>
-                        <p class="card-text text-white h_p">Current HP:
+                        <p class="card-text text-white h_p mb-0">Current HP:
                         </p>
-                        <p class="card-text text-white">Counter-Attack: </p>
+                        <p class="card-text text-white mb-0">Counter-Attack: </p>
 
                     </div>
                 </div>
@@ -214,9 +216,9 @@
                     <img src="Assets/Images/kylo-ren.jpeg" style="width: 100%;" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title text-danger">Kylo Ren</h5>
-                        <p class="card-text text-white h_p">Current HP:
+                        <p class="card-text text-white h_p mb-0">Current HP:
                         </p>
-                        <p class="card-text text-white">Counter-Attack: </p>
+                        <p class="card-text text-white mb-0">Counter-Attack: </p>
 
                     </div>
                 </div>
@@ -225,9 +227,9 @@
                     <img src="Assets/Images/Qui-Gon.jpeg" style="width: 100%;" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title ">Qui-Gon Jinn</h5>
-                        <p class="card-text h_p">Current HP:
+                        <p class="card-text h_p mb-0">Current HP:
                         </p>
-                        <p class="card-text text-white">Counter-Attack: </p>
+                        <p class="card-text text-white mb-0">Counter-Attack: </p>
 
                     </div>
                 </div>
@@ -236,20 +238,20 @@
                     <img src="Assets/Images/han-solo.jpeg" style="width: 100%;" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title ">Han Solo</h5>
-                        <p class="card-text h_p">Current HP:
+                        <p class="card-text h_p mb-0">Current HP:
                         </p>
-                        <p class="card-text text-white">Counter-Attack: </p>
+                        <p class="card-text text-white mb-0">Counter-Attack: </p>
 
                     </div>
                 </div>
                 <!-- Mace Windu -->
-                <div class="card d-none" id="opp-mace-windu" style="width: 18rem;">
+                <div class="card d-none" id="opp-mw" style="width: 18rem;">
                     <img src="Assets/Images/mace-windu.jpeg" style="width: 100%;" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title ">Mace Windu</h5>
-                        <p class="card-text h_p">Current HP:
+                        <p class="card-text h_p mb-0">Current HP:
                         </p>
-                        <p class="card-text text-white">Counter-Attack: </p>
+                        <p class="card-text text-white mb-0">Counter-Attack: </p>
 
                     </div>
                 </div>
@@ -262,28 +264,28 @@
             <div class="col-md-3"></div>
             <div class="col-md-9 d-flex justify-content-end">
                 <!-- Select Opponent  -->
-                <div class="card">
+                <div class="card" id="choose-jinn">
                     <div class="card-body">
                         <div class="d-flex justify-content-center">
-                            <a href="" class="btn btn-success select-jinn mb-2"> Qui-Gon Jinn</a>
+                            <a href="" class="btn btn-success mb-2"> Qui-Gon Jinn</a>
                         </div>
                         <p class="mb-0">Health: 125 </p>
                         <p class="mb-0">Counter-Attack: 30</p>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card" id="choose-solo">
                     <div class="card-body">
                         <div class="d-flex justify-content-center">
-                            <a href="" class="btn btn-success select-solo mb-2"> Han Solo</a>
+                            <a href="" class="btn btn-success mb-2"> Han Solo</a>
                         </div>
                         <p class="mb-0">Health: 180 </p>
                         <p class="mb-0">Counter-Attack: 18</p>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card" id="choose-windu">
                     <div class="card-body">
                         <div class="d-flex justify-content-center">
-                            <a href="" class="btn btn-success select-windu mb-2"> Mace Windu</a>
+                            <a href="" class="btn btn-success mb-2"> Mace Windu</a>
                         </div>
                         <p class="mb-0">Health: 150 </p>
                         <p class="mb-0">Counter-Attack: 23</p>
@@ -302,28 +304,28 @@
             <div class="col-md-3"></div>
             <div class="col-md-9 d-flex justify-content-end ">
                 <!-- Select Opponent  -->
-                <div class="card bg-dark">
+                <div class="card bg-dark" id="choose-ren">
                     <div class="card-body">
                         <div class="d-flex justify-content-center">
-                            <a href="" class="btn btn-danger select-ren mt-0 mb-2"> Kylo Ren</a>
+                            <a href="" class="btn btn-danger  mt-0 mb-2"> Kylo Ren</a>
                         </div class="text-white">
                         <p class="mb-0">Health: 125 </p>
                         <p class="mb-0">Counter-Attack: 30</p>
                     </div>
                 </div>
-                <div class="card bg-dark">
+                <div class="card bg-dark" id="choose-fett">
                     <div class="card-body">
                         <div class="d-flex justify-content-center">
-                            <a href="" class="btn btn-danger select-fett mb-2"> Boba Fett</a>
+                            <a href="" class="btn btn-danger mb-2"> Boba Fett</a>
                         </div class="text-white">
                         <p class="mb-0">Health: 180 </p>
                         <p class="mb-0">Counter-Attack: 18</p>
                     </div>
                 </div>
-                <div class="card bg-dark">
+                <div class="card bg-dark" id="choose-maul">
                     <div class="card-body">
                         <div class="d-flex justify-content-center">
-                            <a href="" class="btn btn-danger select-maul mb-2"> Darth Maul</a>
+                            <a href="" class="btn btn-danger mb-2"> Darth Maul</a>
                         </div class="text-white">
                         <p class="mb-0">Health: 150 </p>
                         <p class="mb-0">Counter-Attack: 23</p>

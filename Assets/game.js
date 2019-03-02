@@ -1,3 +1,9 @@
+var opponentSelected = false;
+var fighter = "";
+var user = "";
+
+// I want to push current fighter objects and current user objects into the above variables 
+
 // darth maul object
 var darthMaul = {
     healthPoints: 150,
@@ -21,6 +27,12 @@ var darthMaul = {
         $('.side-buttons').addClass('d-none');
         var verse = $('<h5>').addClass('text-white mt-2').text('Select Your Opponent');
         $('#choose-side').append(verse);
+    },
+
+    selectedOpp: function () {
+        isFighting = true;
+        currentOpponent = true;
+        $('#opp-darth-maul').removeClass('d-none');
     },
 
 
@@ -53,6 +65,12 @@ var bobaFett = {
         var verse = $('<h5>').addClass('text-white mt-2').text('Select Your Opponent');
         $('#choose-side').append(verse);
     },
+
+    selectedOpp: function () {
+        isFighting = true;
+        currentOpponent = true;
+        $('#opp-boba-fett').removeClass('d-none');
+    },
 }
 
 // Mace Windu Object
@@ -78,6 +96,12 @@ var maceWindu = {
         $('.side-buttons').addClass('d-none');
         var verse = $('<h5>').addClass('text-white mt-2').text('Select Your Opponent');
         $('#choose-side').append(verse);
+    },
+
+    selectedOpp: function () {
+        isFighting = true;
+        currentOpponent = true;
+        $('#opp-mw').removeClass('d-none');
     },
 }
 
@@ -105,6 +129,12 @@ var kyloRen = {
         var verse = $('<h5>').addClass('text-white mt-2').text('Select Your Opponent');
         $('#choose-side').append(verse);
     },
+
+    selectedOpp: function () {
+        isFighting = true;
+        currentOpponent = true;
+        $('#opp-kylo-ren').removeClass('d-none');
+    },
 }
 
 // Qui-Gon Jinn Object
@@ -130,6 +160,12 @@ var quiGon = {
         $('.side-buttons').addClass('d-none');
         var verse = $('<h5>').addClass('text-white mt-2').text('Select Your Opponent');
         $('#choose-side').append(verse);
+    },
+
+    selectedOpp: function () {
+        isFighting = true;
+        currentOpponent = true;
+        $('#opp-qui-gon').removeClass('d-none');
     },
 }
 
@@ -157,6 +193,12 @@ var hanSolo = {
         var verse = $('<h5>').addClass('text-white mt-2').text('Select Your Opponent');
         $('#choose-side').append(verse);
     },
+
+    selectedOpp: function () {
+        isFighting = true;
+        currentOpponent = true;
+        $('#opp-han-solo').removeClass('d-none');
+    },
 }
 
 var displayVillains = function () {
@@ -168,6 +210,7 @@ var displayHeros = function () {
 }
 
 $(document).ready(function () {
+
 
     $('#hero-button').on('click', function () {
         $('#villain-row').addClass('d-none');
@@ -208,7 +251,105 @@ $(document).ready(function () {
     $('#select-jinn').on('click', function () {
         quiGon.selectCharacter();
         displayVillains();
+
+
+
     })
+
+
+    $('#choose-maul').on('click', function () {
+        event.preventDefault();
+        if (opponentSelected === false) {
+            $('#choose-side').empty();
+            var verse = $('<h5>').addClass('text-white text-center display-4 mt-5').text('VS')
+            $('#narrative').append(verse);
+            opponentSelected = true;
+            $(this).empty();
+            darthMaul.selectedOpp();
+
+        } else {
+            alert('You must defeat your current opponent before selecting a new one.')
+        }
+        console.log(darthMaul.currentOpponent)
+
+    })
+
+    $('#choose-ren').on('click', function () {
+        event.preventDefault();
+
+        if (opponentSelected === false) {
+            $('#choose-side').empty();
+            var verse = $('<h5>').addClass('text-white text-center display-4 mt-5').text('VS')
+            $('#narrative').append(verse);
+            opponentSelected = true;
+            $(this).empty();
+            kyloRen.selectedOpp()
+        } else {
+            alert('You must defeat your current opponent before selecting a new one.')
+        }
+    })
+
+    $('#choose-fett').on('click', function () {
+        event.preventDefault();
+
+        if (opponentSelected === false) {
+            $('#choose-side').empty();
+            var verse = $('<h5>').addClass('text-white text-center display-4 mt-5').text('VS')
+            $('#narrative').append(verse);
+            opponentSelected = true;
+            $(this).empty();
+            bobaFett.selectedOpp();
+        } else {
+            alert('You must defeat your current opponent before selecting a new one.')
+        }
+    })
+
+    $('#choose-windu').on('click', function () {
+        event.preventDefault();
+        if (opponentSelected === false) {
+            $('#choose-side').empty();
+            var verse = $('<h5>').addClass('text-white text-center display-4 mt-5').text('VS')
+            $('#narrative').append(verse);
+            opponentSelected = true;
+            $(this).empty();
+            maceWindu.selectedOpp()
+        } else {
+            alert('You must defeat your current opponent before selecting a new one.')
+        }
+    })
+
+    $('#choose-solo').on('click', function () {
+        event.preventDefault();
+        if (opponentSelected === false) {
+            $('#choose-side').empty();
+            var verse = $('<h5>').addClass('text-white text-center display-4 mt-5').text('VS')
+            $('#narrative').append(verse);
+            opponentSelected = true;
+            $(this).empty();
+            hanSolo.selectedOpp()
+        } else {
+            alert('You must defeat your current opponent before selecting a new one.')
+        }
+    })
+
+    $('#choose-jinn').on('click', function () {
+        event.preventDefault();
+        if (opponentSelected === false) {
+            $('#choose-side').empty();
+            var verse = $('<h5>').addClass('text-white text-center display-4 mt-5').text('VS')
+            $('#narrative').append(verse);
+            opponentSelected = true;
+            $(this).empty();
+            quiGon.selectedOpp()
+        } else {
+            alert('You must defeat your current opponent before selecting a new one.')
+        }
+    })
+
+
+
+
+
 
 
 
