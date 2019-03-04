@@ -101,7 +101,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row ">
             <div class="col-md-4">
                 <!-- User Fighter Collumn -->
 
@@ -110,11 +110,15 @@
                     <img src="Assets/Images/darth-maul.jpeg" style="width: 100%;" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title text-danger">Darth Maul</h5>
-                        <p class="card-text text-white h_p">Current HP:
+                        <p class="card-text text-white ">Current HP: <span class="health"></span>
                         </p>
-                        <div class="d-flex justify-content-end">
-                            <a href="#" class="btn btn-danger">Attack</a>
+                        <div class="d-inline-flex justify-content-start">
+                            <a href="#" class="btn btn-danger ranged">Force Attack</a>
                         </div>
+                        <div class="d-inline-flex justify-content-end">
+                            <a href="#" class="btn btn-danger attack">Melee Attack</a>
+                        </div>
+
                     </div>
                 </div>
                 <!-- Boba Fett -->
@@ -122,10 +126,13 @@
                     <img src="Assets/Images/boba-fett.jpeg" style="width: 100%;" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title text-danger">Boba Fett</h5>
-                        <p class="card-text text-white h_p">Current HP:
+                        <p class="card-text text-white h_p">Current HP: <span class="health"></span>
                         </p>
-                        <div class="d-flex justify-content-end">
-                            <a href="#" class="btn btn-danger">Attack</a>
+                        <div class="d-inline-flex justify-content-start">
+                            <a href="#" class="btn btn-danger ranged">Force Attack</a>
+                        </div>
+                        <div class="d-inline-flex justify-content-end">
+                            <a href="#" class="btn btn-danger attack">Melee Attack</a>
                         </div>
                     </div>
                 </div>
@@ -134,10 +141,13 @@
                     <img src="Assets/Images/kylo-ren.jpeg" style="width: 100%;" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title text-danger">Kylo Ren</h5>
-                        <p class="card-text text-white h_p">Current HP:
+                        <p class="card-text text-white h_p">Current HP: <span class="health"></span>
                         </p>
-                        <div class="d-flex justify-content-end">
-                            <a href="#" class="btn btn-danger">Attack</a>
+                        <div class="d-inline-flex justify-content-start">
+                            <a href="#" class="btn btn-danger ranged">Force Attack</a>
+                        </div>
+                        <div class="d-inline-flex justify-content-end">
+                            <a href="#" class="btn btn-danger attack">Melee Attack</a>
                         </div>
                     </div>
                 </div>
@@ -146,10 +156,13 @@
                     <img src="Assets/Images/Qui-Gon.jpeg" style="width: 100%;" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title ">Qui-Gon Jinn</h5>
-                        <p class="card-text h_p">Current HP:
+                        <p class="card-text h_p">Current HP: <span class="health"></span>
                         </p>
-                        <div class="d-flex justify-content-end">
-                            <a href="#" class="btn btn-success">Attack</a>
+                        <div class="d-inline-flex justify-content-start">
+                            <a href="#" class="btn btn-success ranged">Force Attack</a>
+                        </div>
+                        <div class="d-inline-flex justify-content-end">
+                            <a href="#" class="btn btn-success attack">Melee Attack</a>
                         </div>
                     </div>
                 </div>
@@ -158,10 +171,13 @@
                     <img src="Assets/Images/han-solo.jpeg" style="width: 100%;" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title ">Han Solo</h5>
-                        <p class="card-text h_p">Current HP:
+                        <p class="card-text h_p">Current HP: <span class="health"></span>
                         </p>
-                        <div class="d-flex justify-content-end">
-                            <a href="#" class="btn btn-success">Attack</a>
+                        <div class="d-inline-flex justify-content-start">
+                            <a href="#" class="btn btn-success ranged">Force Attack</a>
+                        </div>
+                        <div class="d-inline-flex justify-content-end">
+                            <a href="#" class="btn btn-success attack">Melee Attack</a>
                         </div>
                     </div>
                 </div>
@@ -170,10 +186,13 @@
                     <img src="Assets/Images/mace-windu.jpeg" style="width: 100%;" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title ">Mace Windu</h5>
-                        <p class="card-text h_p">Current HP:
+                        <p class="card-text h_p">Current HP: <span class="health"></span>
                         </p>
-                        <div class="d-flex justify-content-end">
-                            <a href="#" class="btn text-white" style="background-color: #BF5FFF;">Attack</a>
+                        <div class="d-inline-flex justify-content-start">
+                            <a href="#" class="btn btn-success ranged">Force Attack</a>
+                        </div>
+                        <div class="d-inline-flex justify-content-end">
+                            <a href="#" class="btn btn-success attack">Melee Attack</a>
                         </div>
                     </div>
                 </div>
@@ -187,16 +206,15 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 d-flex justify-content-end">
                 <!-- Opponent Fighter Collumn -->
                 <!-- Darth Maul -->
                 <div class="card bg-dark d-none" id="opp-darth-maul" style="width: 18rem;">
                     <img src="Assets/Images/darth-maul.jpeg" style="width: 100%;" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title text-danger">Darth Maul</h5>
-                        <p class="card-text text-white h_p mb-0">Current HP:
+                        <p class="card-text text-white mb-0">Current HP: <span class="health"></span>
                         </p>
-                        <p class="card-text text-white mb-0">Counter-Attack: </p>
 
                     </div>
                 </div>
@@ -205,9 +223,8 @@
                     <img src="Assets/Images/boba-fett.jpeg" style="width: 100%;" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title text-danger">Boba Fett</h5>
-                        <p class="card-text text-white h_p mb-0">Current HP:
+                        <p class="card-text text-white h_p mb-0">Current HP: <span class="health"></span>
                         </p>
-                        <p class="card-text text-white mb-0">Counter-Attack: </p>
 
                     </div>
                 </div>
@@ -216,9 +233,8 @@
                     <img src="Assets/Images/kylo-ren.jpeg" style="width: 100%;" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title text-danger">Kylo Ren</h5>
-                        <p class="card-text text-white h_p mb-0">Current HP:
+                        <p class="card-text text-white h_p mb-0">Current HP: <span class="health"></span>
                         </p>
-                        <p class="card-text text-white mb-0">Counter-Attack: </p>
 
                     </div>
                 </div>
@@ -227,9 +243,8 @@
                     <img src="Assets/Images/Qui-Gon.jpeg" style="width: 100%;" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title ">Qui-Gon Jinn</h5>
-                        <p class="card-text h_p mb-0">Current HP:
+                        <p class="card-text h_p mb-0">Current HP: <span class="health"></span>
                         </p>
-                        <p class="card-text text-white mb-0">Counter-Attack: </p>
 
                     </div>
                 </div>
@@ -238,9 +253,8 @@
                     <img src="Assets/Images/han-solo.jpeg" style="width: 100%;" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title ">Han Solo</h5>
-                        <p class="card-text h_p mb-0">Current HP:
+                        <p class="card-text h_p mb-0">Current HP: <span class="health"></span>
                         </p>
-                        <p class="card-text text-white mb-0">Counter-Attack: </p>
 
                     </div>
                 </div>
@@ -249,9 +263,8 @@
                     <img src="Assets/Images/mace-windu.jpeg" style="width: 100%;" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title ">Mace Windu</h5>
-                        <p class="card-text h_p mb-0">Current HP:
+                        <p class="card-text h_p mb-0">Current HP: <span class="health"></span>
                         </p>
-                        <p class="card-text text-white mb-0">Counter-Attack: </p>
 
                     </div>
                 </div>
