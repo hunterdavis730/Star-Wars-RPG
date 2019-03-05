@@ -1,18 +1,95 @@
 var opponentSelected = false;
 var fighter = "";
 var user = "";
-var startBattle = false;
+// var startBattle = false;
 var enemiesDefeated = 0;
 // add one to this variable each time you defeat an opponent and then create a function with a conditional statement that activates game over when enemiesDefeated === 0
+var gameOver = false;
+
+// var healthQuestions = [1, 2, 3, 4];
+
+// var currentQuestion = 0;
+
+// var getQuestion = function () {
+//     currentQuestion = healthQuestions[Math.floor(Math.random() * healthQuestions.length)]
+//     if (currentQuestion === 1) {
+//         $('#question-line').text('What is Chewbacca’s home planet?')
+//         $('#answer-one').text('Bespin')
+//         $('#answer-two').text('Kashyyyk').removeClass('user-answer').addClass('correct')
+//         $('#answer-three').text('Endor')
+//         $('#answer-four').text('Mustafar')
+//         healthQuestions.splice(0, 1);
+//     } else if (currentQuestion === 2) {
+//         $('#question-line').text('Who is the only non-Jedi/Sith character to use a lightsaber in the original trilogy?')
+//         $('#answer-one').text('Princess Leia')
+//         $('#answer-two').text('Han Solo').removeClass('user-answer').addClass('correct')
+//         $('#answer-three').text('Lando Calrissian')
+//         $('#answer-four').text('Boba Fett')
+//         healthQuestions.splice(1, 1);
+//     } else if (currentQuestion === 3) {
+//         $('#question-line').text('Where did Darth Vader reveal himself to be Luke’s father?')
+//         $('#answer-one').text('Dagobah')
+//         $('#answer-two').text('The Death Star')
+//         $('#answer-three').text('Endor')
+//         $('#answer-four').text('Cloud City').removeClass('user-answer').addClass('correct')
+//         healthQuestions.splice(2, 1);
+//     } else if (currentQuestion === 4) {
+//         $('#question-line').text('What micro–organisms are said to be conductors of the force?')
+//         $('#answer-one').text('Force ghosts')
+//         $('#answer-two').text('Chlamydia')
+//         $('#answer-three').text('Mitochondria')
+//         $('#answer-four').text('Midichlorians').removeClass('user-answer').addClass('correct')
+//         healthQuestions.splice(3, 1);
+//     }
+
+// }
+
+// var displayQuestion = function () {
+//     alert('Answer the Star Wars trivia question correctly to recieve a health pack before battling your next opponent.')
+//     $('#question').removeClass('d-none')
+// }
 
 
-var healthQuestions = [1, 2, 3, 4];
+var displayHealthPacks = function () {
+    opponentSelected = true;
+    alert('Choose from a health pack below to boost HP before battling your next opponent')
+    $('#timer').removeClass('d-none')
+}
 
-var currentQuestion = healthQuestions[Math.floor(Math.random() * healthQuestions.length)];
+// Still need to create a timer and something that displays the amount of health gained.
+
+
+var gameReset = function () {
+    user.resetCharacter();
+    fighter.resetCharacter();
+    opponentSelected = false;
+    gameOver = true;
+    fighter = "";
+    user = "";
+    enemiesDefeated = 0;
+    $('#choose-side').empty();
+    $('#choose-side').append('<h5>' + '- GAME OVER -' + '</h5>').addClass('text-center text-white')
+    $('#narrative').empty();
+    $('#narrative').append('<button>' + 'Play Again' + '</button>').find('button').addClass('btn btn-dark btn-large restart-game')
+    $('#darth-maul, #boba-fett, #kylo-ren, #opp-darth-maul, #opp-boba-fett, #opp-kylo-ren, #opponent-villain, #qui-gon, #mace-windu, #han-solo, #opp-qui-gon, #opp-mace-windu, #opp-han-solo, #opponent-hero').addClass('d-none')
+
+
+};
+
+
+var playAgain = function () {
+
+    if (gameOver) {
+        $('#choose-side, #narrative').empty();
+        $('#choose-side').append('<h5>' + 'Choose Your Side' + '</h5>');
+        $('.side-buttons').removeClass('d-none');
+        gameOver = false;
+    }
 
 
 
 
+}
 
 
 
@@ -66,8 +143,8 @@ var darthMaul = {
     },
 
     selectedOpp: function () {
-        isFighting = true;
-        currentOpponent = true;
+        this.isFighting = true;
+        this.currentOpponent = true;
         $('#opp-darth-maul').removeClass('d-none');
     },
 
@@ -85,7 +162,7 @@ var darthMaul = {
     attack: function () {
 
 
-        if (this.isFighting && this.initializeAttack) {
+        if (this.isFighting && this.initializeAttack && opponentSelected) {
             fighter.healthPoints -= this.currentDamage;
             $('#narrative').empty()
             $('#narrative').addClass('mt-5 mb-2 text center text-white').append('<div>' + `Your attack damaged ${fighter.name} ${this.currentDamage} points.` + '</div>')
@@ -96,20 +173,42 @@ var darthMaul = {
 
     counter: function () {
         if (this.healthPoints <= 0) {
+            this.resetCharacter()
             alert(`You have defeated ${this.name}`)
             this.isFighting = false;
             opponentSelected = false;
             $('#opp-darth-maul').addClass('d-none');
             $('#narrative').empty();
-            var verse = $('<h5>').addClass('text-white mt-2').text('Select Your Opponent');
-            $('#choose-side').append(verse);
 
 
-        } else {
+
+        } else if (opponentSelected) {
             user.healthPoints -= this.currentDamage;
 
             $('#narrative').append('<p>' + `${fighter.name} damaged you ${this.currentDamage} points with his counter attack.` + '</p>')
         }
+
+        if (this.isFighting === false && user.isUser) {
+            displayHealthPacks();
+        }
+    },
+
+    checkHealth: function () {
+        if (user.healthPoints <= 0) {
+            this.isUser = false;
+            this.isFighting = false;
+            this.initializeAttack = false;
+            alert(`You have been defeated by ${fighter.name}`)
+            gameReset();
+        }
+
+
+    },
+
+    resetCharacter: function () {
+        this.healthPoints = 150;
+        this.currentDamage = 0;
+        console.log(darthMaul)
     },
 
 
@@ -125,10 +224,10 @@ var bobaFett = {
     name: 'Boba Fett',
     healthPoints: 180,
     currentDamage: 0,
-    attackPower: [7, 15, 25, 9, 18, 11, ],
-    rangedAttack: [10, 12, 15],
-    rangedCounter: [6, 9, 12, 14],
-    counterAttack: [9, 10, 12, 14, 15, 17, ],
+    attackPower: [5, 7, 10, 12, 15, 17],
+    rangedAttack: [9, 12, 14],
+    rangedCounter: [6, 8, 10, 12, 14],
+    counterAttack: [6, 9, 10, 12, 14, 15, ],
     initializeAttack: false,
     isUser: false,
     isFighting: false,
@@ -165,8 +264,8 @@ var bobaFett = {
     },
 
     selectedOpp: function () {
-        isFighting = true;
-        currentOpponent = true;
+        this.isFighting = true;
+        this.currentOpponent = true;
         $('#opp-boba-fett').removeClass('d-none');
     },
 
@@ -184,7 +283,7 @@ var bobaFett = {
     attack: function () {
 
 
-        if (this.isFighting && this.initializeAttack) {
+        if (this.isFighting && this.initializeAttack && opponentSelected) {
             fighter.healthPoints -= this.currentDamage;
             $('#narrative').empty()
             $('#narrative').addClass('mt-5 mb-2 text center text-white').append('<div>' + `Your attack damaged ${fighter.name} ${this.currentDamage} points.` + '</div>')
@@ -195,6 +294,7 @@ var bobaFett = {
 
     counter: function () {
         if (this.healthPoints <= 0) {
+            this.resetCharacter()
             alert(`You have defeated ${this.name}`)
             this.isFighting = false;
             opponentSelected = false;
@@ -204,12 +304,29 @@ var bobaFett = {
             $('#choose-side').append(verse);
 
 
-        } else {
+        } else if (opponentSelected) {
             user.healthPoints -= this.currentDamage;
 
             $('#narrative').append('<br>').append('<p>' + `${fighter.name} damaged you ${this.currentDamage} points with his counter attack.` + '</p>')
         }
     },
+
+    checkHealth: function () {
+        if (user.healthPoints <= 0) {
+            this.isUser = false;
+            this.isFighting = false;
+            this.initializeAttack = false;
+            alert(`You have been defeated by ${fighter.name}`)
+            gameReset();
+        }
+
+
+    },
+
+    resetCharacter: function () {
+        this.healthPoints = 180;
+        this.currentDamage = 0;
+    }
 
 }
 
@@ -258,8 +375,8 @@ var maceWindu = {
     },
 
     selectedOpp: function () {
-        isFighting = true;
-        currentOpponent = true;
+        this.isFighting = true;
+        this.currentOpponent = true;
         $('#opp-mw').removeClass('d-none');
     },
 
@@ -276,8 +393,7 @@ var maceWindu = {
 
     attack: function () {
 
-
-        if (this.isFighting && this.initializeAttack) {
+        if (this.isFighting && this.initializeAttack && opponentSelected) {
             fighter.healthPoints -= this.currentDamage;
             $('#narrative').empty()
             $('#narrative').addClass('mt-5 text center').text(`Your attack damaged ${fighter.name} ${this.currentDamage} points.`)
@@ -287,6 +403,7 @@ var maceWindu = {
 
     counter: function () {
         if (this.healthPoints <= 0) {
+            this.resetCharacter()
             alert(`You have defeated ${this.name}`)
             this.isFighting = false;
             opponentSelected = false;
@@ -295,12 +412,29 @@ var maceWindu = {
             var verse = $('<h5>').addClass('text-white mt-2').text('Select Your Opponent');
             $('#choose-side').append(verse);
 
-        } else {
+        } else if (opponentSelected) {
             user.healthPoints -= this.currentDamage;
 
             $('#narrative').append('<br>').append('<div>' + `${fighter.name} damaged you ${this.currentDamage} points with his counter attack.` + '</div>')
         }
     },
+
+    checkHealth: function () {
+        if (user.healthPoints <= 0) {
+            this.isUser = false;
+            this.isFighting = false;
+            this.initializeAttack = false;
+            alert(`You have been defeated by ${fighter.name}`)
+            gameReset();
+        }
+
+
+    },
+
+    resetCharacter: function () {
+        this.healthPoints = 150;
+        this.currentDamage = 0;
+    }
 }
 
 // Kylo Ren Object 
@@ -308,10 +442,10 @@ var kyloRen = {
     name: 'Kylo Ren',
     healthPoints: 125,
     currentDamage: 0,
-    attackPower: [7, 15, 25, 9, 18, 11, ],
-    rangedAttack: [10, 12, 15],
-    rangedCounter: [6, 9, 12, 14],
-    counterAttack: [9, 10, 12, 14, 15, 17, ],
+    attackPower: [10, 11, 13, 15, 18, 27],
+    rangedAttack: [11, 13, 18],
+    rangedCounter: [9, 12, 14, 10],
+    counterAttack: [10, 12, 14, 15, 17, 20],
     initializeAttack: false,
     isUser: false,
     isFighting: false,
@@ -348,8 +482,8 @@ var kyloRen = {
     },
 
     selectedOpp: function () {
-        isFighting = true;
-        currentOpponent = true;
+        this.isFighting = true;
+        this.currentOpponent = true;
         $('#opp-kylo-ren').removeClass('d-none');
     },
 
@@ -367,7 +501,7 @@ var kyloRen = {
     attack: function () {
 
 
-        if (this.isFighting && this.initializeAttack) {
+        if (this.isFighting && this.initializeAttack && opponentSelected) {
             fighter.healthPoints -= this.currentDamage;
             $('#narrative').empty()
             $('#narrative').addClass('mt-5 mb-2 text center text-white').append('<div>' + `Your attack damaged ${fighter.name} ${this.currentDamage} points.` + '</div>')
@@ -378,6 +512,7 @@ var kyloRen = {
 
     counter: function () {
         if (this.healthPoints <= 0) {
+            this.resetCharacter()
             alert(`You have defeated ${this.name}`)
             this.isFighting = false;
             opponentSelected = false;
@@ -387,12 +522,29 @@ var kyloRen = {
             $('#choose-side').append(verse);
 
 
-        } else {
+        } else if (opponentSelected) {
             user.healthPoints -= this.currentDamage;
 
             $('#narrative').append('<br>').append('<p>' + `${fighter.name} damaged you ${this.currentDamage} points with his counter attack.` + '</p>')
         }
     },
+
+    checkHealth: function () {
+        if (user.healthPoints <= 0) {
+            this.isUser = false;
+            this.isFighting = false;
+            this.initializeAttack = false;
+            alert(`You have been defeated by ${fighter.name}`)
+            gameReset();
+        }
+
+
+    },
+
+    resetCharacter: function () {
+        this.healthPoints = 125;
+        this.currentDamage = 0;
+    }
 
 }
 
@@ -401,10 +553,10 @@ var quiGon = {
     name: 'Qui-Gon Jinn',
     healthPoints: 125,
     currentDamage: 0,
-    attackPower: [7, 15, 25, 9, 18, 11, ],
-    rangedAttack: [10, 12, 15],
-    rangedCounter: [6, 9, 12, 14],
-    counterAttack: [9, 10, 12, 14, 15, 17, ],
+    attackPower: [10, 11, 13, 15, 18, 27],
+    rangedAttack: [11, 13, 18],
+    rangedCounter: [9, 12, 14, 10],
+    counterAttack: [10, 12, 14, 15, 17, 20],
     initializeAttack: false,
     isUser: false,
     isFighting: false,
@@ -441,8 +593,8 @@ var quiGon = {
     },
 
     selectedOpp: function () {
-        isFighting = true;
-        currentOpponent = true;
+        this.isFighting = true;
+        this.currentOpponent = true;
         $('#opp-qui-gon').removeClass('d-none');
     },
 
@@ -460,7 +612,7 @@ var quiGon = {
     attack: function () {
 
 
-        if (this.isFighting && this.initializeAttack) {
+        if (this.isFighting && this.initializeAttack && opponentSelected) {
             fighter.healthPoints -= this.currentDamage;
             $('#narrative').empty()
             $('#narrative').addClass('mt-5 mb-2 text center text-white').append('<div>' + `Your attack damaged ${fighter.name} ${this.currentDamage} points.` + '</div>')
@@ -471,6 +623,7 @@ var quiGon = {
 
     counter: function () {
         if (this.healthPoints <= 0) {
+            this.resetCharacter()
             alert(`You have defeated ${this.name}`)
             this.isFighting = false;
             opponentSelected = false;
@@ -480,12 +633,29 @@ var quiGon = {
             $('#choose-side').append(verse);
 
 
-        } else {
+        } else if (opponentSelected) {
             user.healthPoints -= this.currentDamage;
 
             $('#narrative').append('<br>').append('<p>' + `${fighter.name} damaged you ${this.currentDamage} points with his counter attack.` + '</p>')
         }
     },
+
+    checkHealth: function () {
+        if (user.healthPoints <= 0) {
+            this.isUser = false;
+            this.isFighting = false;
+            this.initializeAttack = false;
+            alert(`You have been defeated by ${fighter.name}`)
+            gameReset();
+        }
+
+
+    },
+
+    resetCharacter: function () {
+        this.healthPoints = 125;
+        this.currentDamage = 0;
+    }
 
 }
 
@@ -494,10 +664,10 @@ var hanSolo = {
     name: 'Han Solo',
     healthPoints: 180,
     currentDamage: 0,
-    attackPower: [7, 15, 25, 9, 18, 11, ],
-    rangedAttack: [10, 12, 15],
-    rangedCounter: [6, 9, 12, 14],
-    counterAttack: [9, 10, 12, 14, 15, 17, ],
+    attackPower: [5, 7, 10, 12, 15, 17],
+    rangedAttack: [9, 12, 14],
+    rangedCounter: [6, 8, 10, 12, 14],
+    counterAttack: [6, 9, 10, 12, 14, 15, ],
     initializeAttack: false,
     isUser: false,
     isFighting: false,
@@ -534,8 +704,8 @@ var hanSolo = {
     },
 
     selectedOpp: function () {
-        isFighting = true;
-        currentOpponent = true;
+        this.isFighting = true;
+        this.currentOpponent = true;
         $('#opp-han-solo').removeClass('d-none');
     },
 
@@ -553,7 +723,7 @@ var hanSolo = {
     attack: function () {
 
 
-        if (this.isFighting && this.initializeAttack) {
+        if (this.isFighting && this.initializeAttack && opponentSelected) {
             fighter.healthPoints -= this.currentDamage;
             $('#narrative').empty()
             $('#narrative').addClass('mt-5 mb-2 text center text-white').append('<div>' + `Your attack damaged ${fighter.name} ${this.currentDamage} points.` + '</div>')
@@ -564,6 +734,7 @@ var hanSolo = {
 
     counter: function () {
         if (this.healthPoints <= 0) {
+            this.resetCharacter()
             alert(`You have defeated ${this.name}`)
             this.isFighting = false;
             opponentSelected = false;
@@ -573,21 +744,39 @@ var hanSolo = {
             $('#choose-side').append(verse);
 
 
-        } else {
+        } else if (opponentSelected) {
             user.healthPoints -= this.currentDamage;
 
             $('#narrative').append('<br>').append('<p>' + `${fighter.name} damaged you ${this.currentDamage} points with his counter attack.` + '</p>')
         }
     },
 
+    checkHealth: function () {
+        if (user.healthPoints <= 0) {
+            this.isUser = false;
+            this.isFighting = false;
+            this.initializeAttack = false;
+            alert(`You have been defeated by ${fighter.name}`)
+            gameReset();
+        }
+
+
+    },
+
+    resetCharacter: function () {
+        this.currentDamage = 0;
+        this.healthPoints = 180;
+    }
+
 }
 
 var displayVillains = function () {
-    $('#opponent-villain').removeClass('d-none');
+    $('#opponent-villain, #choose-maul, #choose-ren, #choose-fett').removeClass('d-none');
+
 }
 
 var displayHeros = function () {
-    $('#opponent-hero').removeClass('d-none');
+    $('#opponent-hero, #choose-jinn, #choose-windu, #choose-solo').removeClass('d-none');
 }
 
 $(document).ready(function () {
@@ -608,6 +797,7 @@ $(document).ready(function () {
         displayHeros();
         user = darthMaul;
         user.displayStats();
+        $('#narrative').addClass('text-white text-center mt-2').text('Opponents with a lower HP will have a slightly higher counter attack than opponents with greater HP.')
     })
 
     $('#select-ren').on('click', function () {
@@ -615,6 +805,8 @@ $(document).ready(function () {
         displayHeros();
         user = kyloRen;
         user.displayStats();
+        $('#narrative').addClass('text-white text-center mt-2').text('Opponents with a lower HP will have a slightly higher counter attack than opponents with greater HP.')
+
     })
 
     $('#select-fett').on('click', function () {
@@ -622,6 +814,8 @@ $(document).ready(function () {
         displayHeros();
         user = bobaFett;
         user.displayStats();
+        $('#narrative').addClass('text-white text-center mt-2').text('Opponents with a lower HP will have a slightly higher counter attack than opponents with greater HP.')
+
     })
 
     $('#select-windu').on('click', function () {
@@ -629,6 +823,8 @@ $(document).ready(function () {
         displayVillains();
         user = maceWindu;
         user.displayStats();
+        $('#narrative').addClass('text-white text-center mt-2').text('Opponents with a lower HP will have a slightly higher counter attack than opponents with greater HP.')
+
     })
 
     $('#select-solo').on('click', function () {
@@ -636,6 +832,8 @@ $(document).ready(function () {
         displayVillains();
         user = hanSolo;
         user.displayStats();
+        $('#narrative').addClass('text-white text-center mt-2').text('Opponents with a lower HP will have a slightly higher counter attack than opponents with greater HP.')
+
     })
 
     $('#select-jinn').on('click', function () {
@@ -644,6 +842,8 @@ $(document).ready(function () {
         user = quiGon;
         user.displayStats();
         console.log(user)
+        $('#narrative').addClass('text-white text-center mt-2').text('Opponents with a lower HP will have a slightly higher counter attack than opponents with greater HP.')
+
     })
 
 
@@ -651,10 +851,11 @@ $(document).ready(function () {
         event.preventDefault();
         if (opponentSelected === false) {
             $('#choose-side').empty();
+            $('#narrative').empty();
             var verse = $('<h5>').addClass('text-white text-center display-4 mt-5').text('VS')
             $('#narrative').append(verse);
             opponentSelected = true;
-            $(this).empty();
+            $(this).addClass('d-none');
             fighter = darthMaul;
             darthMaul.selectedOpp();
 
@@ -674,10 +875,11 @@ $(document).ready(function () {
 
         if (opponentSelected === false) {
             $('#choose-side').empty();
+            $('#narrative').empty();
             var verse = $('<h5>').addClass('text-white text-center display-4 mt-5').text('VS')
             $('#narrative').append(verse);
             opponentSelected = true;
-            $(this).empty();
+            $(this).addClass('d-none');
             fighter = kyloRen;
             kyloRen.selectedOpp()
         } else {
@@ -696,10 +898,11 @@ $(document).ready(function () {
 
         if (opponentSelected === false) {
             $('#choose-side').empty();
+            $('#narrative').empty();
             var verse = $('<h5>').addClass('text-white text-center display-4 mt-5').text('VS')
             $('#narrative').append(verse);
             opponentSelected = true;
-            $(this).empty();
+            $(this).addClass('d-none');
             bobaFett.selectedOpp();
             fighter = bobaFett;
         } else {
@@ -717,10 +920,11 @@ $(document).ready(function () {
         event.preventDefault();
         if (opponentSelected === false) {
             $('#choose-side').empty();
+            $('#narrative').empty();
             var verse = $('<h5>').addClass('text-white text-center display-4 mt-5').text('VS')
             $('#narrative').append(verse);
             opponentSelected = true;
-            $(this).empty();
+            $(this).addClass('d-none');
             maceWindu.selectedOpp()
             fighter = maceWindu;
         } else {
@@ -738,10 +942,11 @@ $(document).ready(function () {
         event.preventDefault();
         if (opponentSelected === false) {
             $('#choose-side').empty();
+            $('#narrative').empty();
             var verse = $('<h5>').addClass('text-white text-center display-4 mt-5').text('VS')
             $('#narrative').append(verse);
             opponentSelected = true;
-            $(this).empty();
+            $(this).addClass('d-none');
             hanSolo.selectedOpp()
             fighter = hanSolo;
         } else {
@@ -759,18 +964,17 @@ $(document).ready(function () {
         event.preventDefault();
         if (opponentSelected === false) {
             $('#choose-side').empty();
+            $('#narrative').empty();
             var verse = $('<h5>').addClass('text-white text-center display-4 mt-5').text('VS')
             $('#narrative').append(verse);
             opponentSelected = true;
-            $(this).empty();
+            $(this).addClass('d-none');
             quiGon.selectedOpp()
             fighter = quiGon;
         } else {
             alert('You must defeat your current opponent before selecting a new one.')
         }
-        console.log(opponentSelected)
-        console.log(user)
-        console.log(fighter)
+
         if (opponentSelected) {
 
             fighter.displayStats();
@@ -780,25 +984,55 @@ $(document).ready(function () {
 
 
     $('.attack').on('click', function () {
+        // user.checkHealth();
         user.attackMulti();
         fighter.attackMulti();
-        console.log(user.currentDamage)
-        console.log(fighter.currentDamage)
+
         user.attack();
         fighter.counter();
 
         fighter.displayStats()
         user.displayStats()
-
+        user.checkHealth();
     })
 
     $('.ranged').on('click', function () {
+        // user.checkHealth();
         user.rangedMulti();
         fighter.rangedMulti();
         user.attack();
         fighter.counter();
         fighter.displayStats();
         user.displayStats();
+        user.checkHealth();
+    })
+
+    $('.health-pack').on('click', function () {
+        var addedHealth = parseInt($(this).val());
+
+        user.healthPoints += addedHealth;
+        user.displayStats();
+    })
+
+
+    // $('.correct').on('click', function () {
+    //     event.preventDefault();
+    //     alert('Congratulations! Retrieve your health pack below.')
+    // })
+
+    // $('.user-answer').on('click', function () {
+    //     event.preventDefault();
+    //     alert('That answer is incorrect')
+    //     // $('#question').addClass('d-none');
+    //     // $('#narrative').empty();
+    //     // var verse = $('<h5>').addClass('text-white mt-2').text('Select Your Opponent');
+    //     // $('#choose-side').append(verse);
+    // })
+
+
+    $('#narrative').on('click', function () {
+        event.preventDefault();
+        playAgain();
     })
 
 
@@ -817,6 +1051,4 @@ $(document).ready(function () {
 
 
 
-
-
-})
+});
