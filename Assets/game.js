@@ -1,10 +1,38 @@
 var opponentSelected = false;
 var fighter = "";
 var user = "";
-// var startBattle = false;
 var enemiesDefeated = 0;
 // add one to this variable each time you defeat an opponent and then create a function with a conditional statement that activates game over when enemiesDefeated === 0
 var gameOver = false;
+
+var countdown = 11;
+
+var intervalId;
+
+var run = function () {
+    countdown = 11;
+    if (countdown === 0) {
+        stop();
+
+    } else {
+        intervalId = setInterval(decrement, 1000);
+    }
+}
+
+var decrement = function () {
+    countdown--;
+    $('#countdown').text(countdown);
+
+    if (countdown === 0) {
+        stop();
+        $('#timer').addClass('d-none');
+        alert('Your time is up')
+    }
+}
+
+var stop = function () {
+    clearInterval(intervalId)
+}
 
 // var healthQuestions = [1, 2, 3, 4];
 
@@ -53,10 +81,11 @@ var gameOver = false;
 var displayHealthPacks = function () {
     opponentSelected = true;
     alert('Choose from a health pack below to boost HP before battling your next opponent')
+    run();
     $('#timer').removeClass('d-none')
+
 }
 
-// Still need to create a timer and something that displays the amount of health gained.
 
 
 var gameReset = function () {
@@ -174,6 +203,7 @@ var darthMaul = {
     counter: function () {
         if (this.healthPoints <= 0) {
             this.resetCharacter()
+            enemiesDefeated++;
             alert(`You have defeated ${this.name}`)
             this.isFighting = false;
             opponentSelected = false;
@@ -188,7 +218,11 @@ var darthMaul = {
             $('#narrative').append('<p>' + `${fighter.name} damaged you ${this.currentDamage} points with his counter attack.` + '</p>')
         }
 
-        if (this.isFighting === false && user.isUser) {
+        if (enemiesDefeated === 3) {
+            alert('Congratulations! You have successfully defeated all enemy opponents.')
+            gameReset();
+
+        } else if (this.isFighting === false && user.isUser) {
             displayHealthPacks();
         }
     },
@@ -295,19 +329,26 @@ var bobaFett = {
     counter: function () {
         if (this.healthPoints <= 0) {
             this.resetCharacter()
+            enemiesDefeated++;
             alert(`You have defeated ${this.name}`)
             this.isFighting = false;
             opponentSelected = false;
             $('#opp-boba-fett').addClass('d-none');
             $('#narrative').empty();
-            var verse = $('<h5>').addClass('text-white mt-2').text('Select Your Opponent');
-            $('#choose-side').append(verse);
+
 
 
         } else if (opponentSelected) {
             user.healthPoints -= this.currentDamage;
 
             $('#narrative').append('<br>').append('<p>' + `${fighter.name} damaged you ${this.currentDamage} points with his counter attack.` + '</p>')
+        }
+        if (enemiesDefeated === 3) {
+            alert('Congratulations! You have successfully defeated all enemy opponents.')
+            gameReset();
+
+        } else if (this.isFighting === false && user.isUser) {
+            displayHealthPacks();
         }
     },
 
@@ -404,18 +445,25 @@ var maceWindu = {
     counter: function () {
         if (this.healthPoints <= 0) {
             this.resetCharacter()
+            enemiesDefeated++;
             alert(`You have defeated ${this.name}`)
             this.isFighting = false;
             opponentSelected = false;
             $('#opp-mw').addClass('d-none');
             $('#narrative').empty();
-            var verse = $('<h5>').addClass('text-white mt-2').text('Select Your Opponent');
-            $('#choose-side').append(verse);
+
 
         } else if (opponentSelected) {
             user.healthPoints -= this.currentDamage;
 
             $('#narrative').append('<br>').append('<div>' + `${fighter.name} damaged you ${this.currentDamage} points with his counter attack.` + '</div>')
+        }
+        if (enemiesDefeated === 3) {
+            alert('Congratulations! You have successfully defeated all enemy opponents.')
+            gameReset();
+
+        } else if (this.isFighting === false && user.isUser) {
+            displayHealthPacks();
         }
     },
 
@@ -513,19 +561,27 @@ var kyloRen = {
     counter: function () {
         if (this.healthPoints <= 0) {
             this.resetCharacter()
+            enemiesDefeated++;
             alert(`You have defeated ${this.name}`)
             this.isFighting = false;
             opponentSelected = false;
             $('#opp-kylo-ren').addClass('d-none');
             $('#narrative').empty();
-            var verse = $('<h5>').addClass('text-white mt-2').text('Select Your Opponent');
-            $('#choose-side').append(verse);
+
 
 
         } else if (opponentSelected) {
             user.healthPoints -= this.currentDamage;
 
             $('#narrative').append('<br>').append('<p>' + `${fighter.name} damaged you ${this.currentDamage} points with his counter attack.` + '</p>')
+        }
+
+        if (enemiesDefeated === 3) {
+            alert('Congratulations! You have successfully defeated all enemy opponents.')
+            gameReset();
+
+        } else if (this.isFighting === false && user.isUser) {
+            displayHealthPacks();
         }
     },
 
@@ -624,19 +680,27 @@ var quiGon = {
     counter: function () {
         if (this.healthPoints <= 0) {
             this.resetCharacter()
+            enemiesDefeated++;
             alert(`You have defeated ${this.name}`)
             this.isFighting = false;
             opponentSelected = false;
             $('#opp-qui-gon').addClass('d-none');
             $('#narrative').empty();
-            var verse = $('<h5>').addClass('text-white mt-2').text('Select Your Opponent');
-            $('#choose-side').append(verse);
+
 
 
         } else if (opponentSelected) {
             user.healthPoints -= this.currentDamage;
 
             $('#narrative').append('<br>').append('<p>' + `${fighter.name} damaged you ${this.currentDamage} points with his counter attack.` + '</p>')
+        }
+
+        if (enemiesDefeated === 3) {
+            alert('Congratulations! You have successfully defeated all enemy opponents.')
+            gameReset();
+
+        } else if (this.isFighting === false && user.isUser) {
+            displayHealthPacks();
         }
     },
 
@@ -735,13 +799,12 @@ var hanSolo = {
     counter: function () {
         if (this.healthPoints <= 0) {
             this.resetCharacter()
+            enemiesDefeated++;
             alert(`You have defeated ${this.name}`)
             this.isFighting = false;
             opponentSelected = false;
             $('#opp-han-solo').addClass('d-none');
             $('#narrative').empty();
-            var verse = $('<h5>').addClass('text-white mt-2').text('Select Your Opponent');
-            $('#choose-side').append(verse);
 
 
         } else if (opponentSelected) {
@@ -749,6 +812,15 @@ var hanSolo = {
 
             $('#narrative').append('<br>').append('<p>' + `${fighter.name} damaged you ${this.currentDamage} points with his counter attack.` + '</p>')
         }
+
+        if (enemiesDefeated === 3) {
+            alert('Congratulations! You have successfully defeated all enemy opponents.')
+            gameReset();
+
+        } else if (this.isFighting === false && user.isUser) {
+            displayHealthPacks();
+        }
+
     },
 
     checkHealth: function () {
@@ -1009,9 +1081,14 @@ $(document).ready(function () {
 
     $('.health-pack').on('click', function () {
         var addedHealth = parseInt($(this).val());
-
+        stop();
         user.healthPoints += addedHealth;
         user.displayStats();
+        $('#timer').addClass('d-none')
+        opponentSelected = false;
+        var verse = $('<h5>').addClass('text-white mt-2').text('Select Your Opponent');
+        $('#choose-side').append(verse);
+        $('#narrative').addClass('mt-5 mb-2 text center text-white').append('<div>' + `You recieved ${addedHealth} health points.` + '</div>')
     })
 
 
